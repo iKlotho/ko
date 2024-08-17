@@ -43,10 +43,12 @@
     <VendorDir>$(SrcDir)\vendor</VendorDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
+    <OutDir>$(SrcDir)\build\$(PlatformTarget)-$(Configuration)\</OutDir>
+    <IntDir>$(SrcDir)\build\int\$(PlatformTarget)-$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <OutDir>$(SolutionDir)build\$(Configuration)\</OutDir>
+    <OutDir>$(SrcDir)\build\$(PlatformTarget)-$(Configuration)\</OutDir>
+    <IntDir>$(SrcDir)\build\int\$(PlatformTarget)-$(Configuration)\$(ProjectName)\</IntDir>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
     <ClCompile>
@@ -59,7 +61,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>StdAfx.h</PrecompiledHeaderFile>
       <PreprocessorDefinitions>_DEBUG;WIN32;_WINDOWS;_N3TOOL;_N3UIE;DIRECTINPUT_VERSION=0x0800;_CRT_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0502;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SrcDir)\common;$(SrcDir)\engine;$(VendorDir)\spdlog\include;$(WindowsSDK_IncludePath);$(VendorDir)\dxsdk9\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)res;$(SrcDir)\common;$(SrcDir)\engine;$(VendorDir)\spdlog\include;$(WindowsSDK_IncludePath);$(VendorDir)\dxsdk9\Include</AdditionalIncludeDirectories>
       <AdditionalOptions>/wd4018 /wd4091 /wd4244 /wd4267 /wd4477 /wd4838 /wd6031 /wd26495 /wd4102 %(AdditionalOptions)</AdditionalOptions>
       <BasicRuntimeChecks>EnableFastChecks</BasicRuntimeChecks>
       <DebugInformationFormat>EditAndContinue</DebugInformationFormat>
@@ -93,7 +95,7 @@
       <PrecompiledHeader>Use</PrecompiledHeader>
       <PrecompiledHeaderFile>StdAfx.h</PrecompiledHeaderFile>
       <PreprocessorDefinitions>WIN32;NDEBUG;_WINDOWS;_N3TOOL;_N3UIE;DIRECTINPUT_VERSION=0x0800;_CRT_SECURE_NO_WARNINGS;_WIN32_WINNT=0x0502;%(PreprocessorDefinitions)</PreprocessorDefinitions>
-      <AdditionalIncludeDirectories>$(SrcDir)\common;$(SrcDir)\engine;$(VendorDir)\spdlog\include;$(WindowsSDK_IncludePath);$(VendorDir)\dxsdk9\Include</AdditionalIncludeDirectories>
+      <AdditionalIncludeDirectories>$(ProjectDir);$(ProjectDir)res;$(SrcDir)\common;$(SrcDir)\engine;$(VendorDir)\spdlog\include;$(WindowsSDK_IncludePath);$(VendorDir)\dxsdk9\Include</AdditionalIncludeDirectories>
       <AdditionalOptions>/wd4018 /wd4091 /wd4244 /wd4267 /wd4477 /wd4838 /wd6031 /wd26495 /wd4102 %(AdditionalOptions)</AdditionalOptions>
       <IntrinsicFunctions>true</IntrinsicFunctions>
       <FunctionLevelLinking>true</FunctionLevelLinking>
@@ -119,34 +121,34 @@
     </ResourceCompile>
   </ItemDefinitionGroup>
   <ItemGroup>
-    <ClCompile Include="..\Widget\PropertyList.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3Log.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\BitMapFile.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\DFont.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\LogWriter.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3AlphaPrimitiveManager.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3Base.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3BaseFileAccess.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3Eng.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3EngTool.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3SndMgr.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3SndObj.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3SndObjStream.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3Texture.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3UIArea.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3UIBase.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3UIButton.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3UIEdit.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3UIImage.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3UIList.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3UIManager.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3UIProgress.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3UIScrollBar.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3UIStatic.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3UIString.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3UITooltip.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\N3UITrackBar.cpp" />
-    <ClCompile Include="..\..\engine\N3Base\WaveFile.cpp" />
+    <ClCompile Include="$(SrcDir)\tool\Widget\PropertyList.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3Log.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\BitMapFile.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\DFont.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\LogWriter.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3AlphaPrimitiveManager.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3Base.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3BaseFileAccess.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3Eng.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3EngTool.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3SndMgr.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3SndObj.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3SndObjStream.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3Texture.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3UIArea.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3UIBase.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3UIButton.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3UIEdit.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3UIImage.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3UIList.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3UIManager.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3UIProgress.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3UIScrollBar.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3UIStatic.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3UIString.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3UITooltip.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\N3UITrackBar.cpp" />
+    <ClCompile Include="$(SrcDir)\engine\N3Base\WaveFile.cpp" />
     <ClCompile Include="DlgAnimate.cpp" />
     <ClCompile Include="DlgBar.cpp" />
     <ClCompile Include="DlgChangeImage.cpp" />
@@ -166,42 +168,39 @@
     <ClCompile Include="UIEView.cpp" />
   </ItemGroup>
   <ItemGroup>
-    <ResourceCompile Include="UIE.rc" />
-  </ItemGroup>
-  <ItemGroup>
-    <ClInclude Include="..\..\common\N3Utils.h" />
-    <ClInclude Include="..\Widget\PropertyList.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3Log.h" />
-    <ClInclude Include="..\..\engine\N3Base\BitMapFile.h" />
-    <ClInclude Include="..\..\engine\N3Base\DFont.h" />
-    <ClInclude Include="..\..\engine\N3Base\LogWriter.h" />
-    <ClInclude Include="..\..\engine\N3Base\My_3DStruct.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3AlphaPrimitiveManager.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3Base.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3BaseFileAccess.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3Eng.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3EngTool.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3Mng.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3SndDef.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3SndMgr.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3SndObj.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3SndObjStream.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3Texture.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3UIArea.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3UIBase.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3UIButton.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3UIDef.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3UIEdit.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3UIImage.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3UIList.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3UIManager.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3UIProgress.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3UIScrollBar.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3UIStatic.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3UIString.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3UITooltip.h" />
-    <ClInclude Include="..\..\engine\N3Base\N3UITrackBar.h" />
-    <ClInclude Include="..\..\engine\N3Base\WaveFile.h" />
+    <ClInclude Include="$(SrcDir)\common\N3Utils.h" />
+    <ClInclude Include="$(SrcDir)\tool\Widget\PropertyList.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3Log.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\BitMapFile.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\DFont.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\LogWriter.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\My_3DStruct.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3AlphaPrimitiveManager.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3Base.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3BaseFileAccess.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3Eng.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3EngTool.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3Mng.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3SndDef.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3SndMgr.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3SndObj.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3SndObjStream.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3Texture.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3UIArea.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3UIBase.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3UIButton.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3UIDef.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3UIEdit.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3UIImage.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3UIList.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3UIManager.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3UIProgress.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3UIScrollBar.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3UIStatic.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3UIString.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3UITooltip.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\N3UITrackBar.h" />
+    <ClInclude Include="$(SrcDir)\engine\N3Base\WaveFile.h" />
     <ClInclude Include="DlgAnimate.h" />
     <ClInclude Include="DlgBar.h" />
     <ClInclude Include="DlgChangeImage.h" />
@@ -211,7 +210,6 @@
     <ClInclude Include="HierarchyView.h" />
     <ClInclude Include="MainFrm.h" />
     <ClInclude Include="PropertyView.h" />
-    <ClInclude Include="Resource.h" />
     <ClInclude Include="StdAfx.h" />
     <ClInclude Include="TexViewer.h" />
     <ClInclude Include="UIE.h" />
@@ -219,18 +217,15 @@
     <ClInclude Include="UIEView.h" />
   </ItemGroup>
   <ItemGroup>
-    <CustomBuild Include="res\hand.cur" />
+    <ClInclude Include="res\Resource.h" />
+    <ResourceCompile Include="res\UIE.rc" />
     <CustomBuild Include="res\UIE.rc2" />
-    <CustomBuild Include="res\zoomin.cur" />
-    <CustomBuild Include="res\zoomout.cur" />
-  </ItemGroup>
-  <ItemGroup>
     <Image Include="res\Toolbar.bmp" />
     <Image Include="res\UIE.ico" />
     <Image Include="res\UIEDoc.ico" />
-  </ItemGroup>
-  <ItemGroup>
-    <Text Include="ReadMe.txt" />
+    <CustomBuild Include="res\hand.cur" />
+    <CustomBuild Include="res\zoomin.cur" />
+    <CustomBuild Include="res\zoomout.cur" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

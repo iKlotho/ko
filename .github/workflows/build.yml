@@ -4,16 +4,15 @@ on: [workflow_dispatch]
 jobs:
   Windows:
     runs-on: windows-2022
-    if: github.event.pull_request.draft == false
 
     steps:
-      - uses: actions/checkout@v3
+      - uses: actions/checkout@v4
 
       - name: Install Dependencies
         shell: cmd
         run: |
-          cd src
-          git clone --depth=1 https://github.com/ko4life-net/ko-vendor.git vendor
+          git submodule init src/vendor
+          git submodule update src/vendor
 
       - name: Build KnightOnLine
         shell: cmd
@@ -30,7 +29,7 @@ jobs:
           msbuild Server.sln -t:Clean -t:Build -p:Configuration=Release /m
 
       - name: Upload
-        uses: actions/upload-artifact@v3
+        uses: actions/upload-artifact@v4
         with:
           name: x86-release
-          path: src/build/Release/*.exe
+          path: src/build/x86-Release/*.exe
